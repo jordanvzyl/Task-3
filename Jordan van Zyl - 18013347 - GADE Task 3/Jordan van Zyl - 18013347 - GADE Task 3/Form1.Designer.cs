@@ -34,11 +34,13 @@
             this.btnPause = new System.Windows.Forms.Button();
             this.GameTime = new System.Windows.Forms.Timer(this.components);
             this.lblTime = new System.Windows.Forms.Label();
+            this.cmbUnits = new System.Windows.Forms.ComboBox();
+            this.rchUnitInfo = new System.Windows.Forms.RichTextBox();
             this.SuspendLayout();
             // 
             // btnStart
             // 
-            this.btnStart.Location = new System.Drawing.Point(545, 205);
+            this.btnStart.Location = new System.Drawing.Point(542, 152);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(75, 23);
             this.btnStart.TabIndex = 0;
@@ -58,7 +60,7 @@
             // 
             // btnPause
             // 
-            this.btnPause.Location = new System.Drawing.Point(672, 204);
+            this.btnPause.Location = new System.Drawing.Point(669, 151);
             this.btnPause.Name = "btnPause";
             this.btnPause.Size = new System.Drawing.Size(75, 23);
             this.btnPause.TabIndex = 2;
@@ -79,15 +81,33 @@
             this.lblTime.Font = new System.Drawing.Font("Courier New", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblTime.Location = new System.Drawing.Point(593, 27);
             this.lblTime.Name = "lblTime";
-            this.lblTime.Size = new System.Drawing.Size(118, 33);
+            this.lblTime.Size = new System.Drawing.Size(2, 33);
             this.lblTime.TabIndex = 3;
-            this.lblTime.Text = "label1";
+            // 
+            // cmbUnits
+            // 
+            this.cmbUnits.FormattingEnabled = true;
+            this.cmbUnits.Location = new System.Drawing.Point(542, 218);
+            this.cmbUnits.Name = "cmbUnits";
+            this.cmbUnits.Size = new System.Drawing.Size(280, 24);
+            this.cmbUnits.TabIndex = 4;
+            this.cmbUnits.SelectedIndexChanged += new System.EventHandler(this.cmbUnits_SelectedIndexChanged);
+            // 
+            // rchUnitInfo
+            // 
+            this.rchUnitInfo.Location = new System.Drawing.Point(542, 265);
+            this.rchUnitInfo.Name = "rchUnitInfo";
+            this.rchUnitInfo.Size = new System.Drawing.Size(280, 212);
+            this.rchUnitInfo.TabIndex = 5;
+            this.rchUnitInfo.Text = "";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(878, 566);
+            this.Controls.Add(this.rchUnitInfo);
+            this.Controls.Add(this.cmbUnits);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.btnPause);
             this.Controls.Add(this.lblMap);
@@ -107,6 +127,8 @@
         private System.Windows.Forms.Button btnPause;
         private System.Windows.Forms.Timer GameTime;
         private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.ComboBox cmbUnits;
+        private System.Windows.Forms.RichTextBox rchUnitInfo;
     }
 }
 

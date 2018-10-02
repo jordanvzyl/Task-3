@@ -12,13 +12,17 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
 {
     public partial class Form1 : Form
     {
+        // Declared objects
         GameEngine ge;
         Map map;
         Random rnd = new Random();
+
+        // Global Variables
         bool flag;
         int size_X;
         int size_Y;
 
+        // Accessor and set methods for the global variables
         public bool Flag { get => flag; set => flag = value; }
         public int Size_X { get => size_X; set => size_X = value; }
         public int Size_Y { get => size_Y; set => size_Y = value; }
@@ -28,6 +32,7 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
             InitializeComponent();
         }
 
+        // Start button
         private void btnStart_Click(object sender, EventArgs e)
         {
             Flag = true;
@@ -49,6 +54,7 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
             return status;
         }
 
+        // Timer tick for game time
         int time = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
@@ -58,14 +64,21 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                 map.updatePosition();
                 lblTime.Text = "" + time;
                 lblMap.Text = map.redraw(Size_X, Size_Y);
+                cmbUnits.Items.Clear();
+                for (int i = 0; i < map.Unit.Length; i++)
+                {
+                    cmbUnits.Items.Add(map.ComboInfo(i).toString());
+                }
             }
         }
 
+        // Pause button
         private void btnPause_Click(object sender, EventArgs e)
         {
             Flag = false;
         }
 
+        // Size of the map that is determined when the form is loaded and then passed into the relevant constructors
         private void Form1_Load(object sender, EventArgs e)
         {
             int size_X = rnd.Next(10, 21);
@@ -94,6 +107,11 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
             ge = new GameEngine(size_X, size_Y);
             map = new Map(size_X, size_Y);
             lblMap.Text += map.redraw(size_X, size_Y);
+        }
+
+        private void cmbUnits_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            rchUnitInfo.Text = cmbUnits.SelectedItem.ToString();
         }
     }
 }

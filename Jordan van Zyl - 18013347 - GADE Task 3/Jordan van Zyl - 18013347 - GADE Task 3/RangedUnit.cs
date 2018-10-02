@@ -122,9 +122,11 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
         // Override method to return a ToString
         public override string toString()
         {
-            string meleeUnit = "";
-            meleeUnit += Name + "," + Pos_X + "," + Pos_Y + "," + Health + "," + Speed + "," + Attack + "," + AttackRange + "," + Team + "," + Symbol + "," + IsAttacking + "\n";
-            return meleeUnit;
+            string rangedUnit = "";
+            rangedUnit += "Name: " + Name + "\n" + "X-Coordinate: " + Pos_X + "\n" + "Y-Coordinate: " + Pos_Y + "\n";
+            rangedUnit += "Health: " + Health + "\n" + "Speed: " + Speed + "\n" + "Attack: " + Attack + "\n";
+            rangedUnit += "Attack Range: " + AttackRange + "\n" + "Team: " + Team + "\n" + "Symbol: " + Symbol + "\n" + "Attacking: " + IsAttacking + "\n";
+            return rangedUnit;
         }
 
         // Override Save method

@@ -123,7 +123,9 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
         public override string toString()
         {
             string meleeUnit = "";
-            meleeUnit += Name + "," + Pos_X + "," + Pos_Y + "," + Health + "," + Speed + "," + Attack + "," + AttackRange + "," + Team + "," + Symbol + "," + IsAttacking + "\n";
+            meleeUnit += "Name: " + Name + "\n" + "X-Coordinate: " + Pos_X + "\n" + "Y-Coordinate: " + Pos_Y + "\n";
+            meleeUnit += "Health: " + Health + "\n" + "Speed: " + Speed + "\n" + "Attack: " + Attack + "\n";
+            meleeUnit += "Attack Range: " + AttackRange + "\n" + "Team: " + Team + "\n" + "Symbol: " + Symbol + "\n" + "Attacking: " + IsAttacking + "\n";
             return meleeUnit;
         }
 

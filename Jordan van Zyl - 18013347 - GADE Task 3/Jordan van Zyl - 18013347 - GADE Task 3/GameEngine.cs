@@ -9,7 +9,6 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
     public class GameEngine
     {
         Map map;
-        Unit[] unit;
 
         int size_X;
         int size_Y;
