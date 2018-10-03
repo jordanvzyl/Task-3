@@ -67,7 +67,12 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                 cmbUnits.Items.Clear();
                 for (int i = 0; i < map.Unit.Length; i++)
                 {
-                    cmbUnits.Items.Add(map.ComboInfo(i).toString());
+                    cmbUnits.Items.Add(map.UnitInfo(i).toString());
+                    
+                }
+                for(int j = 0; j < map.ArrRBuilding.Length; j++)
+                {
+                    cmbUnits.Items.Add(map.BuildingInfo(j).toString());
                 }
             }
         }

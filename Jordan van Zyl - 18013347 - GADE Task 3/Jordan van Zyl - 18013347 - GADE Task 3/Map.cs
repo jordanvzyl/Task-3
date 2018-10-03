@@ -8,26 +8,35 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
 {
     public class Map
     {
+        // Declared Arrays
         string[,] arrMap;
         Unit[] unit;
+        ResourceBuilding[] arrRBuilding = new ResourceBuilding[4];
+
+        // Declared Object types
         MeleeUnit m_Unit;
         RangedUnit r_Unit;
+        ResourceBuilding r_Building;
 
+        // Global variables
         int size_X;
         int size_Y;
+
         public int Size_X { get => size_X; set => size_X = value; }
         public int Size_Y { get => size_Y; set => size_Y = value; }
 
         public Unit[] Unit { get => unit; set => unit = value; }
+        public string[,] ArrMap { get => arrMap; set => arrMap = value; }
+        public ResourceBuilding[] ArrRBuilding { get => arrRBuilding; set => arrRBuilding = value; }
 
         public Map(int size_X, int size_Y)
         {
-            arrMap = new string[size_Y, size_X];
+            ArrMap = new string[size_Y, size_X];
             for(int i = 0; i < size_Y; i++)
             {
                 for(int j = 0; j < size_X; j++)
                 {
-                    arrMap[i, j] = ".";
+                    ArrMap[i, j] = ".";
                 }
             }
 
@@ -68,11 +77,11 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                         symbol = "M";
                         m_Unit = new MeleeUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, 1, team, symbol, isAttacking);
 
-                        if (arrMap[pos_Y, pos_X] == ".")
+                        if (ArrMap[pos_Y, pos_X] == ".")
                         {
 
                             Unit[unitCount] = m_Unit;
-                            arrMap[pos_Y, pos_X] = symbol;
+                            ArrMap[pos_Y, pos_X] = symbol;
                             unitCount++;
                         }
                     }
@@ -82,11 +91,11 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                         symbol = "m";
                         m_Unit = new MeleeUnit(name2, pos_X, pos_Y, health, maxHealth, speed, attack, 1, team, symbol, isAttacking);
 
-                        if (arrMap[pos_Y, pos_X] == ".")
+                        if (ArrMap[pos_Y, pos_X] == ".")
                         {
 
                             Unit[unitCount] = m_Unit;
-                            arrMap[pos_Y, pos_X] = symbol;
+                            ArrMap[pos_Y, pos_X] = symbol;
                             unitCount++;
                         }
                     }
@@ -100,10 +109,10 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                         symbol = "R";
                         r_Unit = new RangedUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
 
-                        if (arrMap[pos_Y, pos_X] == ".")
+                        if (ArrMap[pos_Y, pos_X] == ".")
                         {
                             Unit[unitCount] = r_Unit;
-                            arrMap[pos_Y, pos_X] = symbol;
+                            ArrMap[pos_Y, pos_X] = symbol;
                             unitCount++;
                         }
                     }
@@ -113,13 +122,80 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                         symbol = "r";
                         r_Unit = new RangedUnit(name2, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
 
-                        if (arrMap[pos_Y, pos_X] == ".")
+                        if (ArrMap[pos_Y, pos_X] == ".")
                         {
                             Unit[unitCount] = r_Unit;
-                            arrMap[pos_Y, pos_X] = symbol;
+                            ArrMap[pos_Y, pos_X] = symbol;
                             unitCount++;
                         }
                     }
+                }
+            }
+            CreateBuildings();
+        }
+
+        // Method to create buildings
+        public void CreateBuildings()
+        {
+            Random rnd = new Random();
+            bool flag = false;
+            int buildings = 0;
+            while (flag == false && buildings < 4)
+            {
+                int pos_X = rnd.Next(0, size_X);
+                int pos_Y = rnd.Next(0, size_Y);
+                int health = 100;
+                int teamRoll = rnd.Next(1, 3);
+                string team = "";
+                string symbol = "";
+
+                switch (teamRoll)
+                {
+                    case 1:
+                        {
+                            team = "Hero";
+                            symbol = "B";
+                        }
+                        break;
+                    case 2:
+                        {
+                            team = "Villain";
+                            symbol = "b";
+                        }
+                        break;
+                }
+
+                string resourceType = "";
+                int type = rnd.Next(1, 3);
+                switch (type)
+                {
+                    case 1:
+                        {
+                            resourceType = "Health";
+                        }
+                        break;
+                    case 2:
+                        {
+                            resourceType = "Extra damage";
+                        }
+                        break;
+                }
+
+                if (ArrMap[pos_Y, pos_X] == ".")
+                {
+                    flag = true;
+                }
+                else
+                {
+                    flag = false;
+                }
+
+                if (flag == true)
+                {
+                    ResourceBuilding r_Building = new ResourceBuilding(pos_X, pos_Y, health, team, symbol, resourceType, 30);
+                    ArrRBuilding[buildings] = r_Building;
+                    arrMap[pos_Y, pos_X] = symbol;
+                    buildings++;
                 }
             }
         }
@@ -136,28 +212,28 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                     if (Unit[i].Pos_X < individualUnit.Pos_X)
                     {
                         Unit[i].newPosition(Unit[i].Pos_X + 1, Unit[i].Pos_Y);
-                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X - 1] = ".";
+                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X - 1] = ".";
                     }
                     if(Unit[i].Pos_X > individualUnit.Pos_X)
                     {
                         Unit[i].newPosition(Unit[i].Pos_X - 1, Unit[i].Pos_Y);
-                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X + 1] = ".";
+                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X + 1] = ".";
                     }
                     if(Unit[i].Pos_X == individualUnit.Pos_X)
                     {
                         if(Unit[i].Pos_Y < individualUnit.Pos_Y)
                         {
                             Unit[i].newPosition(Unit[i].Pos_X, Unit[i].Pos_Y + 1);
-                            arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                            arrMap[Unit[i].Pos_Y - 1, Unit[i].Pos_X] = ".";
+                            ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                            ArrMap[Unit[i].Pos_Y - 1, Unit[i].Pos_X] = ".";
                         }
                         if(Unit[i].Pos_Y > individualUnit.Pos_Y)
                         {
                             Unit[i].newPosition(Unit[i].Pos_X, Unit[i].Pos_Y - 1);
-                            arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                            arrMap[Unit[i].Pos_Y + 1, Unit[i].Pos_X] = ".";
+                            ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                            ArrMap[Unit[i].Pos_Y + 1, Unit[i].Pos_X] = ".";
 
                         }
                     }
@@ -168,7 +244,7 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                     Unit[i].combat(individualUnit);
                     if(Unit[i].Health <= 0)
                     {
-                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = ".";
+                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = ".";
                         Unit[i] = null;
                     }
                     if(Unit[i].Health < 25)
@@ -182,14 +258,14 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                                     if(Unit[i].Pos_Y - Unit[i].Speed <= 0)
                                     {
                                         Unit[i].newPosition(Unit[i].Pos_X, 0);
-                                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                                        arrMap[Unit[i].Pos_Y + 1, Unit[i].Pos_X] = ".";
+                                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                                        ArrMap[Unit[i].Pos_Y + 1, Unit[i].Pos_X] = ".";
                                     }
                                     else
                                     {
                                         Unit[i].newPosition(Unit[i].Pos_X, Unit[i].Pos_Y - Unit[i].Speed);
-                                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                                        arrMap[Unit[i].Pos_Y + Unit[i].Speed, Unit[i].Pos_X] = ".";
+                                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                                        ArrMap[Unit[i].Pos_Y + Unit[i].Speed, Unit[i].Pos_X] = ".";
                                     }
                                     break;
                                 }
@@ -199,14 +275,14 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                                     if (Unit[i].Pos_Y + Unit[i].Speed >= Size_Y)
                                     {
                                         Unit[i].newPosition(Unit[i].Pos_X, Size_Y);
-                                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                                        arrMap[Unit[i].Pos_Y - 1, Unit[i].Pos_X] = ".";
+                                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                                        ArrMap[Unit[i].Pos_Y - 1, Unit[i].Pos_X] = ".";
                                     }
                                     else
                                     {
                                         Unit[i].newPosition(Unit[i].Pos_X, Unit[i].Pos_Y + Unit[i].Speed);
-                                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                                        arrMap[Unit[i].Pos_Y - Unit[i].Speed, Unit[i].Pos_X] = ".";
+                                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                                        ArrMap[Unit[i].Pos_Y - Unit[i].Speed, Unit[i].Pos_X] = ".";
                                     }
                                     break;
                                 }
@@ -216,14 +292,14 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                                     if(Unit[i].Pos_X - Unit[i].Speed <= 0)
                                     {
                                         Unit[i].newPosition(0, Unit[i].Pos_Y);
-                                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                                        arrMap[Unit[i].Pos_Y + 1, Unit[i].Pos_X + 1] = ".";
+                                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                                        ArrMap[Unit[i].Pos_Y + 1, Unit[i].Pos_X + 1] = ".";
                                     }
                                     else
                                     {
                                         Unit[i].newPosition(Unit[i].Pos_X + Unit[i].Speed, Unit[i].Pos_Y);
-                                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                                        arrMap[Unit[i].Pos_Y - Unit[i].Speed, Unit[i].Pos_X] = ".";
+                                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                                        ArrMap[Unit[i].Pos_Y - Unit[i].Speed, Unit[i].Pos_X] = ".";
                                     }
                                     break;
                                 }
@@ -233,14 +309,14 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
                                     if (Unit[i].Pos_X + Unit[i].Speed >= Size_X)
                                     {
                                         Unit[i].newPosition(Size_X, Unit[i].Pos_Y);
-                                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                                        arrMap[Unit[i].Pos_Y - 1, Unit[i].Pos_X + 1] = ".";
+                                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                                        ArrMap[Unit[i].Pos_Y - 1, Unit[i].Pos_X + 1] = ".";
                                     }
                                     else
                                     {
                                         Unit[i].newPosition(Unit[i].Pos_X + Unit[i].Speed, Unit[i].Pos_Y);
-                                        arrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
-                                        arrMap[Unit[i].Pos_Y - Unit[i].Speed, Unit[i].Pos_X] = ".";
+                                        ArrMap[Unit[i].Pos_Y, Unit[i].Pos_X] = Unit[i].Symbol;
+                                        ArrMap[Unit[i].Pos_Y - Unit[i].Speed, Unit[i].Pos_X] = ".";
                                     }
                                     break;
                                 }
@@ -258,7 +334,7 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
             {
                 for (int j = 0; j < size_X; j++)
                 {
-                    s += arrMap[i, j];
+                    s += ArrMap[i, j];
                 }
                 s += "\n";
             }
@@ -266,9 +342,14 @@ namespace Jordan_van_Zyl___18013347___GADE_Task_3
         }
 
         // Method to get the names of each unit for the combobox
-        public Unit ComboInfo(int i)
+        public Unit UnitInfo(int i)
         {
             return Unit[i];
+        }
+
+        public Building BuildingInfo(int i)
+        {
+            return ArrRBuilding[i];
         }
     }
 
