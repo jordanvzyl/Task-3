@@ -17,6 +17,11 @@ namespace Jordan_van_Zyl___18013347___GADE_A3
         // Declared Object types
         MeleeUnit m_Unit;
         RangedUnit r_Unit;
+        StormTrooperUnit st_Unit;
+        SupportUnit su_Unit;
+        MedicUnit me_Unit;
+        ArtilleryUnit a_Unit;
+        ReconUnit re_Unit;
         ResourceBuilding r_Building;
         FactoryBuilding f_Building;
 
@@ -74,7 +79,7 @@ namespace Jordan_van_Zyl___18013347___GADE_A3
                 string name2 = "Bob";
 
                 // Randomise the unit type that will be added to the array
-                int unitType = rnd.Next(1, 3);
+                int unitType = rnd.Next(1, 8);
                 int typeteam = rnd.Next(1, 3);
 
                 // Add a Melee unit to the map array
@@ -110,7 +115,7 @@ namespace Jordan_van_Zyl___18013347___GADE_A3
                     }
                 }
                 // Add a Ranged unit to the map array
-                else
+                if (unitType == 2)
                 {
                     if (typeteam == 1)
                     {
@@ -136,6 +141,172 @@ namespace Jordan_van_Zyl___18013347___GADE_A3
                             Unit[unitCount] = r_Unit;
                             ArrMap[pos_Y, pos_X] = symbol;
                             unitCount++;
+                        }
+                    }
+                    // Add a StormTrooper unit to the map array
+                    if (unitType == 3)
+                    {
+                        if (typeteam == 1)
+                        {
+                            team = "Hero";
+                            symbol = "T";
+                            speed = 3;
+                            st_Unit = new StormTrooperUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                        else
+                        {
+                            team = "Villain";
+                            symbol = "t";
+                            speed = 3;
+                            st_Unit = new StormTrooperUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                    }
+                    // Add a Support unit to the map array
+                    if (unitType == 4)
+                    {
+                        if (typeteam == 1)
+                        {
+                            team = "Hero";
+                            symbol = "S";
+                            attack = 5;
+                            su_Unit = new SupportUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                        else
+                        {
+                            team = "Villain";
+                            symbol = "s";
+                            attack = 5;
+                            su_Unit = new SupportUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                    }
+                    // Add a Medic unit to the map array
+                    if (unitType == 5)
+                    {
+                        if (typeteam == 1)
+                        {
+                            team = "Hero";
+                            symbol = "H";
+                            maxHealth = 120;
+                            health = 100;
+                            me_Unit = new MedicUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                        else
+                        {
+                            team = "Villain";
+                            symbol = "h";
+                            maxHealth = 120;
+                            health = 100;
+                            me_Unit = new MedicUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                    }
+                    // Add a Recon unit to the map array
+                    if (unitType == 6)
+                    {
+                        if (typeteam == 1)
+                        {
+                            team = "Hero";
+                            symbol = "X";
+                            atkRange = 10;
+                            attack = 7;
+                            re_Unit = new ReconUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                        else
+                        {
+                            team = "Villain";
+                            symbol = "x";
+                            atkRange = 10;
+                            attack = 7;
+                            re_Unit = new ReconUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                    }
+                    // Add an Artillery unit to the array
+                    if(unitType == 7)
+                    {
+                        if (typeteam == 1)
+                        {
+                            team = "Hero";
+                            symbol = "X";
+                            atkRange = 11;
+                            attack = 11;
+                            a_Unit = new ArtilleryUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
+                        }
+                        else
+                        {
+                            team = "Villain";
+                            symbol = "x";
+                            atkRange = 11;
+                            attack = 11;
+                            a_Unit = new ArtilleryUnit(name1, pos_X, pos_Y, health, maxHealth, speed, attack, atkRange, team, symbol, isAttacking);
+
+                            if (ArrMap[pos_Y, pos_X] == ".")
+                            {
+                                Unit[unitCount] = st_Unit;
+                                ArrMap[pos_Y, pos_X] = symbol;
+                                unitCount++;
+                            }
                         }
                     }
                 }
