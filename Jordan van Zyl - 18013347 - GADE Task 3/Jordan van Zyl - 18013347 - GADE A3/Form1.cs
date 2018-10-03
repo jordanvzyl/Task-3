@@ -36,7 +36,6 @@ namespace Jordan_van_Zyl___18013347___GADE_A3
         {
             int size_X = rnd.Next(10, 21);
             int size_Y = rnd.Next(10, 21);
-
             Size_X = size_X;
             Size_Y = size_Y;
 
@@ -90,7 +89,7 @@ namespace Jordan_van_Zyl___18013347___GADE_A3
                 }
                 for (int j = 0; j < map.ArrRBuilding.Length; j++)
                 {
-                    cmbUnits.Items.Add(map.BuildingInfo(j).toString());
+                    // cmbUnits.Items.Add(map.BuildingInfo(j).toString());
                 }
             }
         }
@@ -118,6 +117,15 @@ namespace Jordan_van_Zyl___18013347___GADE_A3
         private void btnSave_Click(object sender, EventArgs e)
         {
             map.Save();
+        }
+
+        private void comboBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void cmbWidth_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
